@@ -1,2 +1,2 @@
-# FrecciaYoung-CLI
-A command line tool to find FrecciaYoung tickets
+# FrecciaYoungFinder
+A tool to find FrecciaYoung tickets
