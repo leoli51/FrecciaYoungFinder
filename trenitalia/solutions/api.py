@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from trenitalia.exceptions import TrenitaliaAPIException
 from trenitalia.solutions.models import Solution
 from trenitalia.utils import api
 
@@ -35,6 +36,10 @@ def find_solutions(
             },
         }
         response = api.post(FIND_SOLUTIONS_API_URL, None, request_body)
+
+        if response.get("type") == "ERROR":
+            raise TrenitaliaAPIException(response.get("message"))
+
         last_solutions = [
             Solution.from_api_response(solution)
             for solution in response["solutions"]
@@ -57,6 +62,23 @@ def find_cheap_solutions(
             departure_id=departure_id,
         )
         if any(map(lambda offer: offer.price <= max_price, solution.offers))
+    ]
+
+
+def find_frecciayoung_solutions(
+    *,
+    arrival_id: int,
+    departure_date: datetime,
+    departure_id: int,
+) -> list[Solution]:
+    return [
+        solution
+        for solution in find_solutions(
+            arrival_id=arrival_id,
+            departure_date=departure_date,
+            departure_id=departure_id,
+        )
+        if any(map(lambda offer: offer.name == "FrecciaYOUNG", solution.offers))
     ]
 
 
