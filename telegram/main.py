@@ -141,7 +141,7 @@ def _build_solutions_message(solutions: list[Solution]) -> str:
     message = ""
     for solution in solutions:
         min_price = min([offer.price for offer in solution.offers])
-        message += f"\n{solution.origin} - {solution.destination}, {solution.departure_time.strftime('%Y-%m-%d %H:%M')}-{solution.arrival_time.strftime('%H:%M')} ({solution.duration}): {min_price} €"
+        message += f"\n\n{solution.origin} - {solution.destination}, {solution.departure_time.strftime('%Y-%m-%d %H:%M')}-{solution.arrival_time.strftime('%H:%M')} ({solution.duration}): {min_price} €"
     return message
 
 
