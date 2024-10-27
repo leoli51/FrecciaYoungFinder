@@ -1,0 +1,14 @@
+[Unit]
+Description=FrecciaYoung Telegram Bot
+After=network.target
+
+[Service]
+User=leoli
+WorkingDirectory=/home/leoli/FrecciaYoungFinder
+ExecStart=poetry run python telegram/main.py
+Restart=always
+RestartSec=5
+Environment=TELEGRAM_BOT_TOKEN=your_bot_token_here  # Replace with your bot token or use another method if needed
+
+[Install]
+WantedBy=multi-user.target
