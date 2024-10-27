@@ -26,8 +26,10 @@ class Solution:
     departure_time: datetime
     destination: str
     duration: str
+    has_freccia_young: bool
     origin: str
     offers: list[Offer]
+    
 
     @classmethod
     def from_api_response(cls, solution: dict[str, Any]) -> Solution:
@@ -44,6 +46,7 @@ class Solution:
             ),
             destination=solution["solution"]["destination"],
             duration=solution["solution"]["duration"],
+            has_freccia_young=any(map(lambda offer: offer.name == "FrecciaYOUNG", offers)),
             origin=solution["solution"]["origin"],
             offers=offers,
         )

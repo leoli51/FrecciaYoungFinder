@@ -61,7 +61,7 @@ def find_cheap_solutions(
             departure_date=departure_date,
             departure_id=departure_id,
         )
-        if any(map(lambda offer: offer.price <= max_price, solution.offers))
+        if any(map(lambda offer: offer.price <= max_price or offer.name == "FrecciaYOUNG", solution.offers))
     ]
 
 
